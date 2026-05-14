@@ -141,6 +141,14 @@ const googleLangMap = {
   HE: 'iw'
 };
 
+const setGoogTransCookie = (value) => {
+  const hostParts = window.location.hostname.split('.');
+  document.cookie = `googtrans=${value}; path=/`;
+  if (hostParts.length > 1) {
+    document.cookie = `googtrans=${value}; path=/; domain=.${hostParts.slice(-2).join('.')}`;
+  }
+};
+
 document.querySelectorAll('.flag-button').forEach((button) => {
   const code = (button.dataset.langCode || '').toLowerCase();
   button.innerHTML = `<span class="mini-flag flag-${code}" aria-hidden="true"></span>`;
@@ -246,6 +254,7 @@ const setLanguage = (button) => {
 
 const translateWholePage = (code, attempt = 0) => {
   const googleCode = googleLangMap[code] || 'fr';
+  setGoogTransCookie(`/fr/${googleCode}`);
   const combo = document.querySelector('.goog-te-combo');
   if (!combo) {
     if (attempt < 30) window.setTimeout(() => translateWholePage(code, attempt + 1), 250);
@@ -253,6 +262,28 @@ const translateWholePage = (code, attempt = 0) => {
   }
   combo.value = googleCode;
   combo.dispatchEvent(new Event('change'));
+};
+
+window.closeTranslationBanner = (event) => {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  translationBanner.hidden = true;
+  setGoogTransCookie('/fr/fr');
+  const combo = document.querySelector('.goog-te-combo');
+  if (combo) {
+    combo.value = 'fr';
+    combo.dispatchEvent(new Event('change'));
+  }
+  document.documentElement.lang = 'fr';
+  document.documentElement.dir = 'ltr';
+  document.querySelectorAll('.language-pill, .flag-button').forEach((item) => {
+    item.classList.toggle('active', item.dataset.langCode === 'FR');
+  });
+  document.querySelector('.current-code').textContent = 'FR';
+  const frenchFlag = document.querySelector('.language-pill[data-lang-code="FR"] .flag');
+  if (frenchFlag) document.querySelector('.current-flag').innerHTML = frenchFlag.innerHTML;
 };
 
 document.querySelectorAll('[data-menu-open]').forEach((button) => button.addEventListener('click', openMobileMenu));
@@ -264,10 +295,15 @@ document.querySelector('.flag-rail-toggle').addEventListener('click', () => {
   flagRail.classList.toggle('is-open');
 });
 document.querySelectorAll('.language-pill, .flag-button').forEach((button) => button.addEventListener('click', () => setLanguage(button)));
-document.getElementById('translation-close').addEventListener('click', () => { translationBanner.hidden = true; });
+['click', 'pointerdown', 'touchstart'].forEach((type) => {
+  document.addEventListener(type, (event) => {
+    if (event.target.closest('#translation-close')) window.closeTranslationBanner(event);
+  }, true);
+});
+document.getElementById('translation-close').addEventListener('click', window.closeTranslationBanner);
 document.addEventListener('click', (event) => {
   if (event.target.closest('#translation-close')) {
-    translationBanner.hidden = true;
+    window.closeTranslationBanner(event);
     return;
   }
   if (!flagRail.contains(event.target)) flagRail.classList.remove('is-open');

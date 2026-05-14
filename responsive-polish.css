@@ -120,12 +120,16 @@ body {
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 2;
+  z-index: 1401;
   width: 44px;
   height: 44px;
   display: grid;
   place-items: center;
   line-height: 1;
+}
+
+#translation-banner {
+  z-index: 1400;
 }
 
 ::selection {
