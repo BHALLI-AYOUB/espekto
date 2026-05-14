@@ -479,8 +479,8 @@ body {
     bottom: 5.35rem;
   }
 
-  .modal-backdrop,
-  .mobile-backdrop {
+  #mobile-menu.is-open .mobile-backdrop,
+  #lang-modal.is-open .modal-backdrop {
     backdrop-filter: blur(10px);
   }
 
