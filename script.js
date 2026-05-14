@@ -245,8 +245,6 @@ const setLanguage = (button) => {
   });
   document.querySelector('.current-flag').innerHTML = selectedPill ? selectedPill.innerHTML : '';
   document.querySelector('.current-code').textContent = code;
-  translationMessage.textContent = `🌐 ${copy.banner}${name}`;
-  translationBanner.hidden = false;
   translateWholePage(code);
   closeLangModal();
   if (flagRail) flagRail.classList.remove('is-open');
@@ -269,7 +267,7 @@ window.closeTranslationBanner = (event) => {
     event.preventDefault();
     event.stopPropagation();
   }
-  translationBanner.hidden = true;
+  if (translationBanner) translationBanner.hidden = true;
   setGoogTransCookie('/fr/fr');
   const combo = document.querySelector('.goog-te-combo');
   if (combo) {
@@ -303,7 +301,8 @@ document.querySelectorAll('.language-pill, .flag-button').forEach((button) => bu
     if (event.target.closest('#translation-close')) window.closeTranslationBanner(event);
   }, true);
 });
-document.getElementById('translation-close').addEventListener('click', window.closeTranslationBanner);
+const translationClose = document.getElementById('translation-close');
+if (translationClose) translationClose.addEventListener('click', window.closeTranslationBanner);
 document.addEventListener('click', (event) => {
   if (event.target.closest('#translation-close')) {
     window.closeTranslationBanner(event);
