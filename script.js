@@ -213,6 +213,7 @@ const closeLangModal = () => {
 };
 
 const openLangModal = () => {
+  flagRail.classList.remove('is-open');
   langModal.classList.add('is-open');
   langModal.setAttribute('aria-hidden', 'false');
 };
@@ -258,7 +259,10 @@ document.querySelectorAll('[data-menu-open]').forEach((button) => button.addEven
 document.querySelectorAll('[data-menu-close]').forEach((button) => button.addEventListener('click', closeMobileMenu));
 document.querySelector('.lang-trigger').addEventListener('click', openLangModal);
 document.querySelectorAll('[data-lang-close]').forEach((button) => button.addEventListener('click', closeLangModal));
-document.querySelector('.flag-rail-toggle').addEventListener('click', () => flagRail.classList.toggle('is-open'));
+document.querySelector('.flag-rail-toggle').addEventListener('click', () => {
+  closeLangModal();
+  flagRail.classList.toggle('is-open');
+});
 document.querySelectorAll('.language-pill, .flag-button').forEach((button) => button.addEventListener('click', () => setLanguage(button)));
 document.getElementById('translation-close').addEventListener('click', () => { translationBanner.hidden = true; });
 document.addEventListener('click', (event) => {

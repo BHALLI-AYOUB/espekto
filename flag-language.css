@@ -162,8 +162,12 @@ html[dir="rtl"] .card::before {
 
 #google_translate_element,
 .goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+.goog-te-menu-frame,
 .goog-te-gadget,
-.goog-logo-link {
+.goog-logo-link,
+.goog-te-balloon-frame,
+#goog-gt-tt {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -174,4 +178,13 @@ html[dir="rtl"] .card::before {
 
 body {
   top: 0 !important;
+}
+
+body > .skiptranslate {
+  display: none !important;
+}
+
+iframe.skiptranslate {
+  display: none !important;
+  visibility: hidden !important;
 }
