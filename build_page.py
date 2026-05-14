@@ -103,13 +103,11 @@ def build():
 
     toc = "".join(toc_items)
     lang_buttons = []
-    rail_buttons = []
     for code, lang, country, flag, name, native in LANGS:
         active = " active" if code == "FR" else ""
         direction = "rtl" if code in ("AR", "HE") else "ltr"
         attrs = f'data-lang-code="{code}" data-html-lang="{lang}" data-dir="{direction}" data-lang-name="{html.escape(name)}"'
         lang_buttons.append(f'<button class="language-pill{active}" type="button" {attrs}><span class="flag">{flag}</span><strong>{html.escape(name)}</strong><em>{html.escape(native)}</em></button>')
-        rail_buttons.append(f'<button class="flag-button{active}" type="button" title="{html.escape(name)}" aria-label="{html.escape(name)}" {attrs}><span>{flag}</span><small>{country}</small></button>')
 
     particles = "".join(f'<span class="particle p{i}"></span>' for i in range(1, 13))
     page = f'''<!DOCTYPE html>
@@ -127,11 +125,10 @@ def build():
 <body>
   <div id="reading-progress" aria-hidden="true"></div>
   <div id="translation-banner" hidden><span id="translation-message">&#127760; Traductions automatiques disponibles prochainement. Langue affichée : Français</span><button type="button" id="translation-close" aria-label="Fermer la bannière" onclick="window.closeTranslationBanner && window.closeTranslationBanner(event)">&times;</button></div>
-  <header id="main-header"><nav class="nav-shell" aria-label="Navigation principale"><a class="brand" href="#hero" aria-label="EKSPECTO accueil">EKSPECTO</a><div class="header-actions"><button class="toc-toggle" type="button" data-menu-open data-ui="tocButton">TOC</button><button class="lang-trigger" type="button" aria-haspopup="dialog" aria-controls="lang-modal"><span class="current-flag" aria-hidden="true">&#x1F1EB;&#x1F1F7;</span><span class="current-code">FR</span></button><button class="hamburger" type="button" aria-label="Ouvrir le menu" aria-controls="mobile-menu" aria-expanded="false" data-menu-open><span></span><span></span><span></span></button></div></nav></header>
-  <aside id="flag-rail" aria-label="Sélecteur rapide de langue"><button class="flag-rail-toggle" type="button" aria-label="Afficher les langues">&#127760;</button><div class="flag-list">{''.join(rail_buttons)}</div></aside>
+  <header id="main-header"><nav class="nav-shell" aria-label="Navigation principale"><a class="brand notranslate" href="#hero" aria-label="EKSPECTO accueil">EKSPECTO</a><div class="header-actions"><button class="toc-toggle" type="button" data-menu-open data-ui="tocButton">TOC</button><button class="lang-trigger" type="button" aria-haspopup="dialog" aria-controls="lang-modal"><span class="current-flag" aria-hidden="true">&#x1F1EB;&#x1F1F7;</span><span class="current-code">FR</span></button><button class="hamburger" type="button" aria-label="Ouvrir le menu" aria-controls="mobile-menu" aria-expanded="false" data-menu-open><span></span><span></span><span></span></button></div></nav></header>
   <div id="mobile-menu" aria-hidden="true"><div class="mobile-backdrop" data-menu-close></div><aside class="mobile-panel" aria-label="Table des matières mobile"><div class="mobile-panel-head"><span data-ui="tocTitle">Table des matières</span><button type="button" aria-label="Fermer le menu" data-menu-close>&times;</button></div><nav class="toc-list mobile-toc">{toc}</nav></aside></div>
   <div id="lang-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="lang-title"><div class="modal-backdrop" data-lang-close></div><section class="lang-card" role="document"><button class="modal-close" type="button" aria-label="Fermer" data-lang-close>&times;</button><p class="modal-eyebrow" data-ui="languageEyebrow">Interface linguistique</p><h2 id="lang-title" data-ui="languageTitle">Choisir une langue</h2><div class="language-grid">{''.join(lang_buttons)}</div></section></div>
-  <section id="hero" class="hero"><div class="particle-field" aria-hidden="true">{particles}</div><div class="hero-inner"><span class="confidential-badge" data-ui="badge">Document Confidentiel</span><h1>EKSPECTO</h1><div class="hero-line" aria-hidden="true"></div><p data-ui="heroSubtitle">Plateforme privée de prestige - présentation française</p></div></section>
+  <section id="hero" class="hero"><div class="particle-field" aria-hidden="true">{particles}</div><div class="hero-inner"><span class="confidential-badge" data-ui="badge">Document Confidentiel</span><h1 class="notranslate">EKSPECTO</h1><div class="hero-line" aria-hidden="true"></div><p data-ui="heroSubtitle">Plateforme privée de prestige - présentation française</p></div></section>
   <div class="layout-wrapper"><aside id="toc-sidebar" aria-label="Table des matières"><div class="toc-card"><p data-ui="tocTitle">Table des matières</p><nav class="toc-list">{toc}</nav></div></aside><main id="main-content">{''.join(sections)}</main></div>
   <footer><div class="footer-inner"><h2>EKSPECTO</h2><p data-ui="footerNotice">Document confidentiel - usage interne uniquement</p><span class="footer-diamond">&#9670;</span><small>&copy; Copyright 2023/2026 - EKSPECTO</small></div></footer>
   <button id="back-to-top" type="button" aria-label="Retour en haut">&#8593;</button>

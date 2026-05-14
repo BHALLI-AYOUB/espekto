@@ -132,6 +132,26 @@ body {
   z-index: 1400;
 }
 
+@media (min-width: 769px) {
+  #flag-rail {
+    display: none !important;
+  }
+
+  #translation-banner:not([hidden]) ~ #main-header {
+    top: 46px;
+    z-index: 1390;
+  }
+
+  #translation-banner:not([hidden]) ~ #reading-progress,
+  body.header-small #translation-banner:not([hidden]) ~ #reading-progress {
+    top: calc(var(--header-h) + 46px);
+  }
+
+  #translation-banner:not([hidden]) ~ .hero {
+    padding-top: calc(8rem + 46px);
+  }
+}
+
 ::selection {
   background: rgba(201,168,76,0.32);
   color: var(--color-midnight);

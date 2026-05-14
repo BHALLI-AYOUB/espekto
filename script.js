@@ -221,7 +221,7 @@ const closeLangModal = () => {
 };
 
 const openLangModal = () => {
-  flagRail.classList.remove('is-open');
+  if (flagRail) flagRail.classList.remove('is-open');
   langModal.classList.add('is-open');
   langModal.setAttribute('aria-hidden', 'false');
 };
@@ -249,7 +249,7 @@ const setLanguage = (button) => {
   translationBanner.hidden = false;
   translateWholePage(code);
   closeLangModal();
-  flagRail.classList.remove('is-open');
+  if (flagRail) flagRail.classList.remove('is-open');
 };
 
 const translateWholePage = (code, attempt = 0) => {
@@ -290,10 +290,13 @@ document.querySelectorAll('[data-menu-open]').forEach((button) => button.addEven
 document.querySelectorAll('[data-menu-close]').forEach((button) => button.addEventListener('click', closeMobileMenu));
 document.querySelector('.lang-trigger').addEventListener('click', openLangModal);
 document.querySelectorAll('[data-lang-close]').forEach((button) => button.addEventListener('click', closeLangModal));
-document.querySelector('.flag-rail-toggle').addEventListener('click', () => {
-  closeLangModal();
-  flagRail.classList.toggle('is-open');
-});
+const flagRailToggle = document.querySelector('.flag-rail-toggle');
+if (flagRailToggle && flagRail) {
+  flagRailToggle.addEventListener('click', () => {
+    closeLangModal();
+    flagRail.classList.toggle('is-open');
+  });
+}
 document.querySelectorAll('.language-pill, .flag-button').forEach((button) => button.addEventListener('click', () => setLanguage(button)));
 ['click', 'pointerdown', 'touchstart'].forEach((type) => {
   document.addEventListener(type, (event) => {
@@ -306,7 +309,7 @@ document.addEventListener('click', (event) => {
     window.closeTranslationBanner(event);
     return;
   }
-  if (!flagRail.contains(event.target)) flagRail.classList.remove('is-open');
+  if (flagRail && !flagRail.contains(event.target)) flagRail.classList.remove('is-open');
 });
 
 document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -327,7 +330,7 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
     closeMobileMenu();
     closeLangModal();
-    flagRail.classList.remove('is-open');
+    if (flagRail) flagRail.classList.remove('is-open');
   }
 });
 updateScrollUi();
