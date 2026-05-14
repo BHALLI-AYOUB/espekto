@@ -266,6 +266,10 @@ document.querySelector('.flag-rail-toggle').addEventListener('click', () => {
 document.querySelectorAll('.language-pill, .flag-button').forEach((button) => button.addEventListener('click', () => setLanguage(button)));
 document.getElementById('translation-close').addEventListener('click', () => { translationBanner.hidden = true; });
 document.addEventListener('click', (event) => {
+  if (event.target.closest('#translation-close')) {
+    translationBanner.hidden = true;
+    return;
+  }
   if (!flagRail.contains(event.target)) flagRail.classList.remove('is-open');
 });
 

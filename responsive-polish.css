@@ -118,6 +118,14 @@ body {
 #translation-close {
   position: absolute;
   right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  line-height: 1;
 }
 
 ::selection {
@@ -221,6 +229,10 @@ body {
     border-bottom: 0;
     background: var(--glass-dark);
     padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  #flag-rail {
+    display: none !important;
   }
 
   #main-header::after {
@@ -466,48 +478,6 @@ body {
     padding-left: 0.55rem;
   }
 
-  #flag-rail {
-    right: auto;
-    left: 50%;
-    bottom: 4.85rem;
-    transform: translateX(-50%);
-    top: auto;
-  }
-
-  .flag-rail-toggle {
-    width: 52px;
-    height: 52px;
-  }
-
-  .flag-list {
-    position: fixed;
-    left: 50%;
-    right: auto;
-    bottom: 8.35rem;
-    grid-template-columns: repeat(5, 48px);
-    max-height: min(48vh, 360px);
-    width: min(94vw, 292px);
-    justify-content: center;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    transform: translateY(12px);
-  }
-
-  #flag-rail:hover .flag-list,
-  #flag-rail.is-open .flag-list {
-    transform: translateY(0);
-  }
-
-  .flag-button {
-    width: 48px;
-    height: 42px;
-  }
-
-  .mini-flag {
-    width: 34px;
-    height: 23px;
-  }
-
   #back-to-top {
     width: 48px;
     height: 48px;
@@ -545,15 +515,6 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .flag-list {
-    grid-template-columns: repeat(4, 46px);
-    width: min(94vw, 236px);
-  }
-
-  .flag-button {
-    width: 46px;
-  }
-
   .hero h1 {
     font-size: clamp(2.2rem, 15vw, 3.2rem);
   }
@@ -572,10 +533,6 @@ body {
     justify-content: center;
   }
 
-  .flag-list {
-    grid-template-columns: repeat(3, 46px);
-    width: min(94vw, 184px);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
