@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 html {
   scroll-behavior: smooth;
 }
@@ -12,20 +14,20 @@ body {
   overflow-x: hidden;
   background: #ffffff;
   color: #000;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
   font-weight: 400;
-  line-height: 1.62;
+  line-height: 1.55;
 }
 
 .page {
   width: 100%;
-  padding: 80px 24px 38px;
+  padding: 76px 24px 38px;
   background: #ffffff;
 }
 
 .content {
-  width: min(660px, calc(100% - 40px));
+  width: min(950px, calc(100% - 40px));
   margin: 0 auto;
   background: #ffffff;
 }
@@ -33,58 +35,55 @@ body {
 .main-title {
   width: 360px;
   max-width: 100%;
-  margin: 0 auto 22px;
+  margin: 0 auto 18px;
   text-align: center;
   color: #e40046;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 40px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 34px;
   font-weight: 700;
-  line-height: 0.9;
+  line-height: 0.95;
 }
 
 .copyright {
-  margin: 0 0 19px;
+  margin: 0 0 18px;
   text-align: center;
-  font-size: 14px;
+  font-size: 12px;
   font-style: italic;
-  line-height: 1.35;
+  line-height: 1.45;
 }
 
 .club-line {
-  margin: 0 0 20px;
+  margin: 0 0 18px;
   text-align: center;
   color: #ff0000;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1.35;
 }
 
 .construction-note {
-  margin: 0 0 32px;
+  margin: 0 0 30px;
   text-align: center;
-  color: #000;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
-  line-height: 1.4;
-}
-
-.construction-note span {
-  color: #000 !important;
+  line-height: 1.45;
 }
 
 .origin-block {
-  max-width: 680px;
-  margin: 0 auto 28px;
+  max-width: 950px;
+  margin: 0 auto 27px;
   text-align: center;
-  font-size: 13px;
+  font-size: 12px;
   font-style: italic;
-  line-height: 1.55;
+  line-height: 1.48;
 }
 
 .doc-paragraph {
-  margin: 0 0 23px;
-  font-size: 16px;
-  line-height: 1.62;
+  margin: 0 0 17px;
+  font-size: 12px;
+  line-height: 1.58;
+  text-align: justify;
+  text-justify: inter-word;
   overflow-wrap: anywhere;
 }
 
@@ -98,24 +97,39 @@ body {
 }
 
 .doc-paragraph.note {
-  margin-top: 26px;
-  font-size: 18px;
-  line-height: 1.55;
+  margin-top: 20px;
+  font-size: 12px;
+  line-height: 1.58;
 }
 
 .doc-paragraph.important-note {
-  font-size: 26px;
-  line-height: 1.35;
+  font-size: 14px;
+  line-height: 1.45;
 }
 
 .doc-paragraph.list-like {
-  margin-bottom: 22px;
-  font-size: 18px;
+  margin-bottom: 17px;
+  font-size: 12px;
   line-height: 1.58;
+  text-align: left;
 }
 
 .bold {
   font-weight: 700;
+  font-size: 14px;
+}
+
+.doc-paragraph.red-paragraph {
+  margin-bottom: 8px;
+  font-size: 16px;
+  line-height: 1.36;
+}
+
+span[style*="color:#C00000"],
+span[style*="color:#FF0000"],
+span[style*="color:#ff0000"] {
+  font-size: 16px;
+  line-height: 1.36;
 }
 
 .italic {
@@ -154,7 +168,7 @@ a {
   border-radius: 3px;
   background: #fff;
   color: #000;
-  font: 13px Arial, Helvetica, sans-serif;
+  font: 12px "Montserrat", sans-serif;
 }
 
 .google-note {
@@ -258,7 +272,7 @@ body {
 
 @media (max-width: 1200px) {
   .content {
-    width: min(760px, calc(100% - 260px));
+    width: min(950px, calc(100% - 300px));
     margin: 0 auto;
   }
 
@@ -269,7 +283,7 @@ body {
 
 @media (max-width: 900px) {
   body {
-    font-size: 16px;
+    font-size: 12px;
   }
 
   .page {
@@ -277,7 +291,7 @@ body {
   }
 
   .content {
-    width: min(760px, 100%);
+    width: min(950px, 100%);
     margin: 0 auto;
   }
 
@@ -289,7 +303,7 @@ body {
 
   .main-title {
     margin-top: 8px;
-    font-size: 34px;
+    font-size: 31px;
   }
 
   .scroll-buttons {
@@ -301,8 +315,8 @@ body {
 
 @media (max-width: 520px) {
   body {
-    font-size: 15px;
-    line-height: 1.55;
+    font-size: 12px;
+    line-height: 1.58;
   }
 
   .page {
@@ -311,42 +325,49 @@ body {
 
   .main-title {
     width: 280px;
-    font-size: 30px;
+    font-size: 27px;
     margin-bottom: 18px;
   }
 
   .copyright {
-    font-size: 14px;
-    line-height: 1.4;
+    font-size: 12px;
+    line-height: 1.45;
   }
 
   .club-line {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 1.35;
   }
 
   .construction-note {
-    font-size: 16px;
-    line-height: 1.4;
-  }
-
-  .origin-block {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.45;
   }
 
+  .origin-block {
+    font-size: 12px;
+    line-height: 1.48;
+  }
+
   .doc-paragraph {
-    font-size: 15px;
-    margin-bottom: 18px;
+    font-size: 12px;
+    margin-bottom: 15px;
   }
 
   .doc-paragraph.note,
   .doc-paragraph.list-like {
-    font-size: 16px;
+    font-size: 12px;
   }
 
   .doc-paragraph.important-note {
-    font-size: 22px;
+    font-size: 14px;
+  }
+
+  .doc-paragraph.red-paragraph,
+  span[style*="color:#C00000"],
+  span[style*="color:#FF0000"],
+  span[style*="color:#ff0000"] {
+    font-size: 16px;
   }
 
   .scroll-buttons {
@@ -375,7 +396,7 @@ body {
 
 @media (max-width: 360px) {
   body {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .page {
@@ -385,7 +406,7 @@ body {
 
   .main-title {
     width: 250px;
-    font-size: 27px;
+    font-size: 25px;
   }
 
   .language-box {
