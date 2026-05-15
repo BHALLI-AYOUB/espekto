@@ -214,9 +214,7 @@ def build_index(content):
 """
 
 
-STYLE = """@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
-
-html {
+STYLE = """html {
   scroll-behavior: smooth;
 }
 
@@ -230,7 +228,7 @@ body {
   overflow-x: hidden;
   background: #ffffff;
   color: #000;
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.62;
@@ -238,12 +236,12 @@ body {
 
 .page {
   width: 100%;
-  padding: 105px 24px 38px;
+  padding: 80px 24px 38px;
   background: #ffffff;
 }
 
 .content {
-  width: min(760px, calc(100% - 40px));
+  width: min(660px, calc(100% - 40px));
   margin: 0 auto;
   background: #ffffff;
 }
@@ -351,7 +349,7 @@ a {
 
 .language-box {
   position: fixed;
-  top: 86px;
+  top: 28px;
   right: 44px;
   z-index: 10;
   width: 225px;
