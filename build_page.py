@@ -156,6 +156,8 @@ def read_docx():
         if rendered:
             paragraphs.append(rendered)
             source_index += 1
+    if len(paragraphs) >= 5:
+        paragraphs = paragraphs[:3] + [paragraphs[4], paragraphs[3]] + paragraphs[5:]
     return paragraphs
 
 
@@ -215,7 +217,6 @@ def build_index(content):
 STYLE = """@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
 html {
-  height: 100%;
   scroll-behavior: smooth;
 }
 
@@ -225,10 +226,9 @@ html {
 
 body {
   margin: 0;
-  height: 100%;
   min-height: 100vh;
-  overflow: hidden;
-  background: #f3e6e6;
+  overflow-x: hidden;
+  background: #ffffff;
   color: #000;
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
   font-size: 16px;
@@ -238,31 +238,30 @@ body {
 
 .page {
   width: 100%;
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding: 58px 24px 38px;
+  padding: 105px 24px 38px;
+  background: #ffffff;
 }
 
 .content {
-  width: min(1180px, calc(100% - 40px));
+  width: min(760px, calc(100% - 40px));
   margin: 0 auto;
+  background: #ffffff;
 }
 
 .main-title {
   width: 360px;
   max-width: 100%;
-  margin: 0 auto 20px;
+  margin: 0 auto 22px;
   text-align: center;
   color: #e40046;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 38px;
+  font-size: 40px;
   font-weight: 700;
   line-height: 0.9;
 }
 
 .copyright {
-  margin: 0 0 17px;
+  margin: 0 0 19px;
   text-align: center;
   font-size: 14px;
   font-style: italic;
@@ -270,7 +269,7 @@ body {
 }
 
 .club-line {
-  margin: 0 0 18px;
+  margin: 0 0 20px;
   text-align: center;
   color: #ff0000;
   font-size: 18px;
@@ -279,7 +278,7 @@ body {
 }
 
 .construction-note {
-  margin: 0 0 29px;
+  margin: 0 0 32px;
   text-align: center;
   color: #000;
   font-size: 16px;
@@ -293,7 +292,7 @@ body {
 
 .origin-block {
   max-width: 680px;
-  margin: 0 auto 22px;
+  margin: 0 auto 28px;
   text-align: center;
   font-size: 13px;
   font-style: italic;
@@ -352,8 +351,8 @@ a {
 
 .language-box {
   position: fixed;
-  top: 32px;
-  right: 34px;
+  top: 86px;
+  right: 44px;
   z-index: 10;
   width: 225px;
   text-align: center;
@@ -477,8 +476,8 @@ body {
 
 @media (max-width: 1200px) {
   .content {
-    max-width: calc(100% - 260px);
-    margin-left: 6%;
+    width: min(760px, calc(100% - 260px));
+    margin: 0 auto;
   }
 
   .scroll-buttons {
@@ -496,7 +495,7 @@ body {
   }
 
   .content {
-    max-width: 100%;
+    width: min(760px, 100%);
     margin: 0 auto;
   }
 
@@ -619,7 +618,6 @@ body {
 
 
 SCRIPT = """const languageSelect = document.getElementById('language-select');
-const scrollRoot = document.querySelector('.page');
 const scrollUp = document.getElementById('scroll-up');
 const scrollMiddle = document.getElementById('scroll-middle');
 const scrollDown = document.getElementById('scroll-down');
@@ -651,23 +649,14 @@ const applyLanguage = (targetLanguage, attempt = 0) => {
   combo.dispatchEvent(new Event('change'));
 };
 
-const getScrollTop = () => scrollRoot ? scrollRoot.scrollTop : window.scrollY;
+const getScrollTop = () => window.scrollY || document.documentElement.scrollTop;
 
-const getScrollMax = () => {
-  if (scrollRoot) {
-    return Math.max(0, scrollRoot.scrollHeight - scrollRoot.clientHeight);
-  }
-  return Math.max(
+const getScrollMax = () => Math.max(
     document.body.scrollHeight,
     document.documentElement.scrollHeight
   ) - window.innerHeight;
-};
 
 const setScrollTop = (top, behavior = 'smooth') => {
-  if (scrollRoot) {
-    scrollRoot.scrollTo({ top, behavior });
-    return;
-  }
   window.scrollTo({ top, behavior });
 };
 
@@ -745,11 +734,7 @@ if (scrollDown) {
   });
 }
 
-if (scrollRoot) {
-  scrollRoot.addEventListener('scroll', updateMiddlePosition, { passive: true });
-} else {
-  window.addEventListener('scroll', updateMiddlePosition, { passive: true });
-}
+window.addEventListener('scroll', updateMiddlePosition, { passive: true });
 window.addEventListener('resize', updateMiddlePosition);
 updateMiddlePosition();
 """

@@ -1,5 +1,4 @@
 const languageSelect = document.getElementById('language-select');
-const scrollRoot = document.querySelector('.page');
 const scrollUp = document.getElementById('scroll-up');
 const scrollMiddle = document.getElementById('scroll-middle');
 const scrollDown = document.getElementById('scroll-down');
@@ -31,23 +30,14 @@ const applyLanguage = (targetLanguage, attempt = 0) => {
   combo.dispatchEvent(new Event('change'));
 };
 
-const getScrollTop = () => scrollRoot ? scrollRoot.scrollTop : window.scrollY;
+const getScrollTop = () => window.scrollY || document.documentElement.scrollTop;
 
-const getScrollMax = () => {
-  if (scrollRoot) {
-    return Math.max(0, scrollRoot.scrollHeight - scrollRoot.clientHeight);
-  }
-  return Math.max(
+const getScrollMax = () => Math.max(
     document.body.scrollHeight,
     document.documentElement.scrollHeight
   ) - window.innerHeight;
-};
 
 const setScrollTop = (top, behavior = 'smooth') => {
-  if (scrollRoot) {
-    scrollRoot.scrollTo({ top, behavior });
-    return;
-  }
   window.scrollTo({ top, behavior });
 };
 
@@ -125,10 +115,6 @@ if (scrollDown) {
   });
 }
 
-if (scrollRoot) {
-  scrollRoot.addEventListener('scroll', updateMiddlePosition, { passive: true });
-} else {
-  window.addEventListener('scroll', updateMiddlePosition, { passive: true });
-}
+window.addEventListener('scroll', updateMiddlePosition, { passive: true });
 window.addEventListener('resize', updateMiddlePosition);
 updateMiddlePosition();
