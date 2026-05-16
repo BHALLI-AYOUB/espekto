@@ -222,6 +222,8 @@ STYLE = """@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght
 
 html {
   scroll-behavior: smooth;
+  width: 100%;
+  max-width: 100%;
 }
 
 * {
@@ -230,6 +232,8 @@ html {
 
 body {
   margin: 0;
+  width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   overflow-x: hidden;
   background: #ffffff;
@@ -238,6 +242,13 @@ body {
   font-size: 13px;
   font-weight: 400;
   line-height: 1.55;
+}
+
+img,
+video,
+iframe,
+table {
+  max-width: 100%;
 }
 
 .page {
@@ -250,6 +261,8 @@ body {
   width: min(950px, calc(100% - 40px));
   margin: 0 auto;
   background: #ffffff;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .main-title {
@@ -262,6 +275,7 @@ body {
   font-size: 34px;
   font-weight: 700;
   line-height: 0.95;
+  overflow-wrap: anywhere;
 }
 
 .copyright {
@@ -271,6 +285,7 @@ body {
   font-style: italic;
   line-height: 1.45;
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .club-line {
@@ -281,6 +296,7 @@ body {
   font-weight: 700;
   line-height: 1.35;
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .construction-note {
@@ -290,6 +306,7 @@ body {
   font-weight: 700;
   line-height: 1.45;
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .origin-block {
@@ -300,6 +317,7 @@ body {
   font-style: italic;
   line-height: 1.48;
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .doc-paragraph {
@@ -309,11 +327,14 @@ body {
   text-align: justify;
   text-justify: inter-word;
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .doc-paragraph span,
 .doc-paragraph a {
   overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: normal;
 }
 
 .doc-paragraph.center {
@@ -392,6 +413,7 @@ a {
 
 .language-box select {
   width: 100%;
+  max-width: 100%;
   height: 22px;
   border: 2px solid #111;
   border-radius: 3px;
@@ -516,11 +538,11 @@ body {
   }
 
   .page {
-    padding: 18px 24px 42px 14px;
+    padding: 18px clamp(14px, 4vw, 24px) 42px;
   }
 
   .content {
-    width: calc(100vw - 38px);
+    width: 100%;
     max-width: 950px;
     margin: 0 auto;
   }
@@ -533,7 +555,16 @@ body {
 
   .main-title {
     margin-top: 8px;
-    font-size: 31px;
+    width: min(360px, 100%);
+    font-size: clamp(28px, 8vw, 31px);
+  }
+
+  .copyright,
+  .club-line,
+  .construction-note,
+  .origin-block,
+  .doc-paragraph {
+    max-width: 100%;
   }
 
   .scroll-buttons {
@@ -550,16 +581,21 @@ body {
   }
 
   .page {
-    padding: 8px 24px 68px 10px;
+    padding: 8px 12px 68px;
   }
 
   .content {
-    width: calc(100vw - 34px);
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .language-box {
+    width: min(260px, calc(100% - 24px));
   }
 
   .main-title {
-    width: 280px;
-    font-size: 27px;
+    width: min(280px, 100%);
+    font-size: clamp(25px, 8vw, 27px);
     margin-bottom: 18px;
   }
 
@@ -586,6 +622,8 @@ body {
   .doc-paragraph {
     font-size: 13px;
     margin-bottom: 15px;
+    text-align: left;
+    text-justify: auto;
   }
 
   .doc-paragraph.note,
@@ -634,25 +672,70 @@ body {
   }
 
   .page {
-    padding-left: 8px;
-    padding-right: 22px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .content {
-    width: calc(100vw - 30px);
+    width: 100%;
   }
 
   .main-title {
-    width: 250px;
+    width: min(250px, 100%);
     font-size: 25px;
   }
 
   .language-box {
-    width: calc(100% - 18px);
+    width: calc(100% - 20px);
   }
 
   .language-box select {
     font-size: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .page {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .language-box {
+    width: calc(100% - 28px);
+  }
+
+  .main-title {
+    width: min(245px, 100%);
+    font-size: 24px;
+  }
+
+  .copyright {
+    font-size: 12px;
+  }
+
+  .club-line,
+  .doc-paragraph.red-paragraph,
+  span[style*="color:#C00000"],
+  span[style*="color:#FF0000"],
+  span[style*="color:#ff0000"] {
+    font-size: 15px;
+  }
+
+  .construction-note,
+  .doc-paragraph.important-note,
+  .bold {
+    font-size: 14px;
+  }
+
+  .origin-block,
+  .doc-paragraph,
+  .doc-paragraph.note,
+  .doc-paragraph.list-like {
+    font-size: 12px;
+  }
+
+  .scroll-buttons {
+    display: none;
   }
 }
 """
