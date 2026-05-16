@@ -279,7 +279,7 @@ table {
 }
 
 .copyright {
-  margin: 0 0 34px;
+  margin: 0 0 56px;
   text-align: center;
   font-size: 13px;
   font-style: italic;
@@ -289,7 +289,7 @@ table {
 }
 
 .club-line {
-  margin: 0 0 18px;
+  margin: 0 0 20px;
   text-align: center;
   color: #ff0000;
   font-size: 17px;
@@ -378,8 +378,15 @@ span[style*="color:#ff0000"] {
 }
 
 .doc-paragraph.about-section-title {
-  margin-top: 32px;
-  margin-bottom: 26px;
+  margin-top: 58px;
+  margin-bottom: 32px;
+  font-size: 18px;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.doc-paragraph.about-section-title .bold {
+  font-size: 18px;
 }
 
 .italic {
@@ -602,6 +609,7 @@ body {
   .copyright {
     font-size: 13px;
     line-height: 1.45;
+    margin-bottom: 42px;
   }
 
   .club-line {
@@ -624,6 +632,16 @@ body {
     margin-bottom: 15px;
     text-align: left;
     text-justify: auto;
+  }
+
+  .doc-paragraph.about-section-title {
+    margin-top: 46px;
+    margin-bottom: 28px;
+    font-size: 17px;
+  }
+
+  .doc-paragraph.about-section-title .bold {
+    font-size: 17px;
   }
 
   .doc-paragraph.note,
@@ -711,6 +729,7 @@ body {
 
   .copyright {
     font-size: 12px;
+    margin-bottom: 34px;
   }
 
   .club-line,
@@ -732,6 +751,11 @@ body {
   .doc-paragraph.note,
   .doc-paragraph.list-like {
     font-size: 12px;
+  }
+
+  .doc-paragraph.about-section-title,
+  .doc-paragraph.about-section-title .bold {
+    font-size: 16px;
   }
 
   .scroll-buttons {
