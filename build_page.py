@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-DOCX = Path(r"c:\Users\SKSM-Dev5\Downloads\EKSPECTO EN FRANCAIS.docx")
+DOCX = Path.home() / "Downloads" / "EKSPECTO EN FRANCAIS.docx"
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
 
 LANGUAGES = [
@@ -141,6 +141,8 @@ def paragraph_html(paragraph, source_index):
         classes.append("note")
     if normalized.upper().startswith("NOTE IMPORTANTE"):
         classes.append("important-note")
+    if normalized == "A propos d'ekspecto.com":
+        classes.append("about-section-title")
     if normalized.startswith("- ") or re.match(r"^-?\s*\d+[. ]", normalized):
         classes.append("list-like")
     if "color:#C00000" in inner or "color:#FF0000" in inner or "color:#ff0000" in inner:
@@ -233,7 +235,7 @@ body {
   background: #ffffff;
   color: #000;
   font-family: "Montserrat", sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 400;
   line-height: 1.55;
 }
@@ -263,42 +265,46 @@ body {
 }
 
 .copyright {
-  margin: 0 0 18px;
+  margin: 0 0 34px;
   text-align: center;
-  font-size: 12px;
+  font-size: 13px;
   font-style: italic;
   line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 .club-line {
   margin: 0 0 18px;
   text-align: center;
   color: #ff0000;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .construction-note {
   margin: 0 0 30px;
   text-align: center;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 1.45;
+  overflow-wrap: anywhere;
 }
 
 .origin-block {
   max-width: 950px;
   margin: 0 auto 27px;
   text-align: center;
-  font-size: 12px;
+  font-size: 13px;
   font-style: italic;
   line-height: 1.48;
+  overflow-wrap: anywhere;
 }
 
 .doc-paragraph {
   margin: 0 0 17px;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.58;
   text-align: justify;
   text-justify: inter-word;
@@ -316,38 +322,43 @@ body {
 
 .doc-paragraph.note {
   margin-top: 20px;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.58;
 }
 
 .doc-paragraph.important-note {
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.45;
 }
 
 .doc-paragraph.list-like {
   margin-bottom: 17px;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.58;
   text-align: left;
 }
 
 .bold {
   font-weight: 700;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .doc-paragraph.red-paragraph {
   margin-bottom: 8px;
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.36;
 }
 
 span[style*="color:#C00000"],
 span[style*="color:#FF0000"],
 span[style*="color:#ff0000"] {
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.36;
+}
+
+.doc-paragraph.about-section-title {
+  margin-top: 32px;
+  margin-bottom: 26px;
 }
 
 .italic {
@@ -501,7 +512,7 @@ body {
 
 @media (max-width: 900px) {
   body {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .page {
@@ -509,7 +520,8 @@ body {
   }
 
   .content {
-    width: min(950px, 100%);
+    width: calc(100vw - 38px);
+    max-width: 950px;
     margin: 0 auto;
   }
 
@@ -533,12 +545,16 @@ body {
 
 @media (max-width: 520px) {
   body {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.58;
   }
 
   .page {
     padding: 8px 24px 68px 10px;
+  }
+
+  .content {
+    width: calc(100vw - 34px);
   }
 
   .main-title {
@@ -548,44 +564,44 @@ body {
   }
 
   .copyright {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.45;
   }
 
   .club-line {
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1.35;
   }
 
   .construction-note {
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.45;
   }
 
   .origin-block {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.48;
   }
 
   .doc-paragraph {
-    font-size: 12px;
+    font-size: 13px;
     margin-bottom: 15px;
   }
 
   .doc-paragraph.note,
   .doc-paragraph.list-like {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .doc-paragraph.important-note {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .doc-paragraph.red-paragraph,
   span[style*="color:#C00000"],
   span[style*="color:#FF0000"],
   span[style*="color:#ff0000"] {
-    font-size: 16px;
+    font-size: 17px;
   }
 
   .scroll-buttons {
@@ -614,12 +630,16 @@ body {
 
 @media (max-width: 360px) {
   body {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .page {
     padding-left: 8px;
     padding-right: 22px;
+  }
+
+  .content {
+    width: calc(100vw - 30px);
   }
 
   .main-title {
