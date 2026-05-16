@@ -142,7 +142,7 @@ def paragraph_html(paragraph, source_index):
     if normalized.upper().startswith("NOTE IMPORTANTE"):
         classes.append("important-note")
     if normalized == "A propos d'ekspecto.com":
-        classes.append("about-section-title")
+        return f'<h2 class="about-section-title">{inner}</h2>'
     if normalized.startswith("- ") or re.match(r"^-?\s*\d+[. ]", normalized):
         classes.append("list-like")
     if "color:#C00000" in inner or "color:#FF0000" in inner or "color:#ff0000" in inner:
@@ -322,7 +322,7 @@ table {
 
 .doc-paragraph {
   margin: 0 0 17px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.58;
   text-align: justify;
   text-justify: inter-word;
@@ -343,50 +343,57 @@ table {
 
 .doc-paragraph.note {
   margin-top: 20px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.58;
 }
 
 .doc-paragraph.important-note {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.45;
 }
 
 .doc-paragraph.list-like {
   margin-bottom: 17px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.58;
   text-align: left;
 }
 
 .bold {
   font-weight: 700;
+  font-size: 16px;
+}
+
+.copyright .bold {
   font-size: 15px;
 }
 
 .doc-paragraph.red-paragraph {
   margin-bottom: 8px;
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.36;
 }
 
 span[style*="color:#C00000"],
 span[style*="color:#FF0000"],
 span[style*="color:#ff0000"] {
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.36;
 }
 
-.doc-paragraph.about-section-title {
-  margin-top: 58px;
-  margin-bottom: 32px;
-  font-size: 18px;
+.about-section-title {
+  margin: 58px 0 26px;
+  color: #000;
+  font-family: "Montserrat", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
   line-height: 1.35;
   text-align: left;
+  overflow-wrap: anywhere;
 }
 
-.doc-paragraph.about-section-title .bold {
-  font-size: 18px;
+.about-section-title .bold {
+  font-size: 24px;
 }
 
 .italic {
@@ -628,36 +635,36 @@ body {
   }
 
   .doc-paragraph {
-    font-size: 13px;
+    font-size: 14px;
     margin-bottom: 15px;
     text-align: left;
     text-justify: auto;
   }
 
-  .doc-paragraph.about-section-title {
+  .about-section-title {
     margin-top: 46px;
-    margin-bottom: 28px;
-    font-size: 17px;
+    margin-bottom: 24px;
+    font-size: 22px;
   }
 
-  .doc-paragraph.about-section-title .bold {
-    font-size: 17px;
+  .about-section-title .bold {
+    font-size: 22px;
   }
 
   .doc-paragraph.note,
   .doc-paragraph.list-like {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .doc-paragraph.important-note {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .doc-paragraph.red-paragraph,
   span[style*="color:#C00000"],
   span[style*="color:#FF0000"],
   span[style*="color:#ff0000"] {
-    font-size: 17px;
+    font-size: 18px;
   }
 
   .scroll-buttons {
@@ -737,25 +744,25 @@ body {
   span[style*="color:#C00000"],
   span[style*="color:#FF0000"],
   span[style*="color:#ff0000"] {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .construction-note,
   .doc-paragraph.important-note,
   .bold {
-    font-size: 14px;
+    font-size: 15px;
   }
 
   .origin-block,
   .doc-paragraph,
   .doc-paragraph.note,
   .doc-paragraph.list-like {
-    font-size: 12px;
+    font-size: 13px;
   }
 
-  .doc-paragraph.about-section-title,
-  .doc-paragraph.about-section-title .bold {
-    font-size: 16px;
+  .about-section-title,
+  .about-section-title .bold {
+    font-size: 20px;
   }
 
   .scroll-buttons {
