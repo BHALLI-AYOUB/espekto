@@ -262,7 +262,7 @@ table {
   left: 0;
   z-index: 1000;
   width: 100%;
-  min-height: 190px;
+  min-height: 250px;
   padding: 76px 24px 18px;
   background: #ffffff;
 }
@@ -275,7 +275,7 @@ table {
 
 .page {
   width: 100%;
-  padding: 190px 24px 38px;
+  padding: 250px 24px 38px;
   background: #ffffff;
 }
 
@@ -574,11 +574,11 @@ body {
   }
 
   .page {
-    padding: 240px clamp(14px, 4vw, 24px) 42px;
+    padding: 300px clamp(14px, 4vw, 24px) 42px;
   }
 
   .fixed-header {
-    min-height: 230px;
+    min-height: 290px;
     padding: 18px clamp(14px, 4vw, 24px) 16px;
   }
 
@@ -622,7 +622,7 @@ body {
   }
 
   .page {
-    padding: 242px 12px 68px;
+    padding: 320px 12px 68px;
   }
 
   .content {
@@ -635,7 +635,7 @@ body {
   }
 
   .fixed-header {
-    min-height: 230px;
+    min-height: 310px;
     padding: 8px 12px 14px;
   }
 
@@ -729,7 +729,7 @@ body {
   }
 
   .page {
-    padding-top: 230px;
+    padding-top: 320px;
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -739,7 +739,7 @@ body {
   }
 
   .fixed-header {
-    min-height: 220px;
+    min-height: 310px;
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -941,8 +941,8 @@ updateMiddlePosition();
 
 def main():
     paragraphs = read_docx()
-    header_content = "\n".join(f"      {paragraph}" for paragraph in paragraphs[:2])
-    body_content = "\n".join(f"      {paragraph}" for paragraph in paragraphs[2:])
+    header_content = "\n".join(f"      {paragraph}" for paragraph in paragraphs[:4])
+    body_content = "\n".join(f"      {paragraph}" for paragraph in paragraphs[4:])
     (ROOT / "index.html").write_text(build_index(header_content, body_content), encoding="utf-8")
     (ROOT / "style.css").write_text(STYLE, encoding="utf-8")
     (ROOT / "script.js").write_text(SCRIPT, encoding="utf-8")
