@@ -165,7 +165,7 @@ def read_docx():
     return paragraphs
 
 
-def build_index(content):
+def build_index(header_content, body_content):
     options = "\n".join(
         f'          <option value="{html.escape(code)}">{html.escape(label)}</option>'
         for code, label in LANGUAGES
@@ -181,18 +181,23 @@ def build_index(content):
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="language-box" aria-label="Choix de langue">
-    <p>Pour choisir une autre<br>langue, CLIQUEZ ICI</p>
-    <select id="language-select" aria-label="Selectionner une langue">
+  <header class="fixed-header">
+    <div class="header-content">
+{header_content}
+    </div>
+    <div class="language-box" aria-label="Choix de langue">
+      <p>Pour choisir une autre<br>langue, CLIQUEZ ICI</p>
+      <select id="language-select" aria-label="Selectionner une langue">
 {options}
-    </select>
-    <span class="google-note">Fourni par <span class="google-word"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></span> Traduction</span>
-  </div>
+      </select>
+      <span class="google-note">Fourni par <span class="google-word"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></span> Traduction</span>
+    </div>
+  </header>
   <div id="google_translate_element" aria-hidden="true"></div>
 
   <main class="page">
     <article class="content">
-{content}
+{body_content}
     </article>
   </main>
 
@@ -251,9 +256,26 @@ table {
   max-width: 100%;
 }
 
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  min-height: 190px;
+  padding: 76px 24px 18px;
+  background: #ffffff;
+}
+
+.header-content {
+  width: min(950px, calc(100% - 40px));
+  margin: 0 auto;
+  background: #ffffff;
+}
+
 .page {
   width: 100%;
-  padding: 76px 24px 38px;
+  padding: 190px 24px 38px;
   background: #ffffff;
 }
 
@@ -552,7 +574,12 @@ body {
   }
 
   .page {
-    padding: 18px clamp(14px, 4vw, 24px) 42px;
+    padding: 240px clamp(14px, 4vw, 24px) 42px;
+  }
+
+  .fixed-header {
+    min-height: 230px;
+    padding: 18px clamp(14px, 4vw, 24px) 16px;
   }
 
   .content {
@@ -595,7 +622,7 @@ body {
   }
 
   .page {
-    padding: 8px 12px 68px;
+    padding: 242px 12px 68px;
   }
 
   .content {
@@ -605,6 +632,11 @@ body {
 
   .language-box {
     width: min(260px, calc(100% - 24px));
+  }
+
+  .fixed-header {
+    min-height: 230px;
+    padding: 8px 12px 14px;
   }
 
   .main-title {
@@ -697,12 +729,19 @@ body {
   }
 
   .page {
+    padding-top: 230px;
     padding-left: 10px;
     padding-right: 10px;
   }
 
   .content {
     width: 100%;
+  }
+
+  .fixed-header {
+    min-height: 220px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   .main-title {
@@ -902,8 +941,9 @@ updateMiddlePosition();
 
 def main():
     paragraphs = read_docx()
-    content = "\n".join(f"      {paragraph}" for paragraph in paragraphs)
-    (ROOT / "index.html").write_text(build_index(content), encoding="utf-8")
+    header_content = "\n".join(f"      {paragraph}" for paragraph in paragraphs[:2])
+    body_content = "\n".join(f"      {paragraph}" for paragraph in paragraphs[2:])
+    (ROOT / "index.html").write_text(build_index(header_content, body_content), encoding="utf-8")
     (ROOT / "style.css").write_text(STYLE, encoding="utf-8")
     (ROOT / "script.js").write_text(SCRIPT, encoding="utf-8")
     print(f"Generated index.html with {len(paragraphs)} paragraphs from {DOCX}")
